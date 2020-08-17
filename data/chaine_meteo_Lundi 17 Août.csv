@@ -1,0 +1,29 @@
+,jour,period,meteo,logo
+0,Lundi 17 Août,Nuit,"['Ciel à moitié nuageux.', '', 'Quelques averses.']",https://static2.mclcm.net/lcm2018/int/picto/nuit/x3060.png
+1,Lundi 17 Août,Matin,"['Ciel à moitié nuageux.', '', 'Quelques averses faibles.']",https://static4.mclcm.net/lcm2018/int/picto/jour/x3050.png
+2,Lundi 17 Août,Après-midi,"['De nombreux nuages, mais aussi quelques belles éclaircies.', '', 'Quelques averses faibles.']",https://static4.mclcm.net/lcm2018/int/picto/jour/x3050.png
+3,Lundi 17 Août,Soir,"['Eclaircies et passages nuageux parfois denses.', '', 'Quelques averses faibles.']",https://static4.mclcm.net/lcm2018/int/picto/jour/x3050.png
+4,18 Août,Nuit,"[""Légers passages nuageux n'altérant pas le beau temps.""]",https://static2.mclcm.net/lcm2018/int/picto/nuit/c0010.png
+5,18 Août,Matin,"['Ciel à moitié nuageux.', '', 'Quelques averses faibles.']",https://static4.mclcm.net/lcm2018/int/picto/jour/x3050.png
+6,18 Août,Après-midi,"['Ciel variable devenant peu nuageux.', '', ""Possibilité d'averses en début d'après-midi.""]",https://static4.mclcm.net/lcm2018/int/picto/jour/c0023.png
+7,18 Août,Soir,['Beau temps peu nuageux.'],https://static1.mclcm.net/lcm2018/int/picto/jour/c0010.png
+8,19 Août,Nuit,"['Eclaircies, mais formations brumeuses possibles.']",https://static2.mclcm.net/lcm2018/int/picto/nuit/c0061.png
+9,19 Août,Matin,['Ciel très nuageux devenant couvert.'],https://static1.mclcm.net/lcm2018/int/picto/jour/c0043.png
+10,19 Août,Après-midi,['Ciel très nuageux devenant plus variable.'],https://static4.mclcm.net/lcm2018/int/picto/jour/c0070.png
+11,19 Août,Soir,['Beau temps malgré quelques passages nuageux.'],https://static4.mclcm.net/lcm2018/int/picto/jour/c0023.png
+12,20 Août,Nuit,['Beau temps peu nuageux devenant variable.'],https://static2.mclcm.net/lcm2018/int/picto/nuit/c0023.png
+13,20 Août,Matin,['Ciel variable devenant très nuageux.'],https://static2.mclcm.net/lcm2018/int/picto/jour/c0080.png
+14,20 Août,Après-midi,['Ciel à moitié nuageux.'],https://static3.mclcm.net/lcm2018/int/picto/jour/c0025.png
+15,20 Août,Soir,['Eclaircies et passages nuageux parfois denses.'],https://static3.mclcm.net/lcm2018/int/picto/jour/c0025.png
+16,21 Août,Nuit,"['Ciel très nuageux avec de courtes éclaircies.', '', ""Possibilité d'averses.""]",https://static4.mclcm.net/lcm2018/int/picto/nuit/c0030.png
+17,21 Août,Matin,"['Ciel très nuageux devenant couvert.', '', 'Quelques averses faibles.']",https://static3.mclcm.net/lcm2018/int/picto/jour/p0050.png
+18,21 Août,Après-midi,"['Ciel très nuageux avec de courtes éclaircies.', '', 'Averses faibles et de plus en plus rares.']",https://static4.mclcm.net/lcm2018/int/picto/jour/x3050.png
+19,21 Août,Soir,['Eclaircies et passages nuageux parfois denses.'],https://static3.mclcm.net/lcm2018/int/picto/jour/c0025.png
+20,22 Août,Nuit,['Ciel à moitié nuageux.'],https://static1.mclcm.net/lcm2018/int/picto/nuit/c0025.png
+21,22 Août,Matin,"['Ciel à moitié nuageux.', '', ""Possibilité d'averses.""]",https://static3.mclcm.net/lcm2018/int/picto/jour/c0025.png
+22,22 Août,Après-midi,"['Ciel variable devenant peu nuageux.', '', 'Averses faibles et de plus en plus rares.']",https://static4.mclcm.net/lcm2018/int/picto/jour/x3050.png
+23,22 Août,Soir,['Beau temps peu nuageux.'],https://static1.mclcm.net/lcm2018/int/picto/jour/c0010.png
+24,23 Août,Nuit,['Beau temps peu nuageux.'],https://static2.mclcm.net/lcm2018/int/picto/nuit/c0010.png
+25,23 Août,Matin,"['Ciel très nuageux avec de courtes éclaircies.', '', 'Averses tombant en fin de matinée.']",https://static2.mclcm.net/lcm2018/int/picto/jour/x3060.png
+26,23 Août,Après-midi,"['De nombreux nuages, mais aussi quelques belles éclaircies.', '', 'Quelques averses faibles.']",https://static4.mclcm.net/lcm2018/int/picto/jour/x3050.png
+27,23 Août,Soir,"['Ciel très nuageux devenant plus variable.', '', 'Averses faibles et de plus en plus rares.']",https://static4.mclcm.net/lcm2018/int/picto/nuit/x3050.png
