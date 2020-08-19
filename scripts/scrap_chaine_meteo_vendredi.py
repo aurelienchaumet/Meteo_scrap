@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
+import datetime
 
 response = requests.get('https://www.lachainemeteo.com/meteo-france/ville-215860/previsions-meteo-saint-georges-d-oleron-demain')
 
@@ -232,6 +233,6 @@ meteo_semaine = pd.concat([meteo_demain, meteo_dimanche, meteo_lundi, meteo_mard
 
 semaine = meteo_semaine['jour'][0]
 
-datetime = datetime.datetime.now().strftime("%Y.%d.%m.%H.%M.%S")
+datetime = datetime.datetime.now().strftime("%Y.%m.%d.%H.%M.%S")
 
 meteo_semaine.to_csv("/home/freebox/Desktop/Meteo/data/chaine_meteo_"+semaine+"_"+datetime+".csv")
