@@ -231,6 +231,11 @@ meteo_vendredi.insert(0,'jour',[jour, jour, jour, jour])
 
 meteo_semaine = pd.concat([meteo_demain, meteo_dimanche, meteo_lundi, meteo_mardi, meteo_mercredi, meteo_jeudi, meteo_vendredi], ignore_index=True)
 
+i = 0
+while i<4:
+    meteo_semaine['jour'][i] = meteo_semaine['jour'][i][9:]
+    i += 1
+
 semaine = meteo_semaine['jour'][0]
 
 datetime = datetime.datetime.now().strftime("%Y.%m.%d.%H.%M.%S")
