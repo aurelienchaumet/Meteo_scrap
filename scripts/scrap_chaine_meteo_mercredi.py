@@ -12,6 +12,8 @@ alls = []
 for d in soup.find_all("div", {"class":"quarter"}):
     period = d.find('div', attrs={'class':'front single'})
     text = d.find('div', attrs={'class':'cellText'})
+    temperature = d.select('.quarter .data>.splitData:nth-of-type(3) :nth-of-type(1)')[0].find('div')
+    vent = d.select('.quarter .data>.splitData:nth-of-type(4)')[0].find('span')
     logo = d.find('img')
 
     all1=[]
@@ -22,12 +24,18 @@ for d in soup.find_all("div", {"class":"quarter"}):
     if text is not None:
         all1.append(text.text.strip().splitlines())
 
+    if temperature is not None:
+        all1.append(temperature.text)
+
+    if vent is not None:
+        all1.append(vent.text)
+
     if logo is not None:
         all1.append(logo['data-src'])
 
     alls.append(all1)
 
-meteo_demain = pd.DataFrame(alls, columns=['period', 'meteo', 'logo'])
+meteo_demain = pd.DataFrame(alls, columns=['period', 'meteo', 'temperature', 'vent', 'logo'])
 meteo_demain = meteo_demain.loc[0:3]
 
 for d in soup.find_all("div", {"id":"forecastContainer"}):
@@ -45,6 +53,8 @@ alls = []
 for d in soup.find_all("div", {"class":"quarter"}):
     period = d.find('div', attrs={'class':'front single'})
     text = d.find('div', attrs={'class':'cellText'})
+    temperature = d.select('.quarter .data>.splitData:nth-of-type(3) :nth-of-type(1)')[0].find('div')
+    vent = d.select('.quarter .data>.splitData:nth-of-type(4)')[0].find('span')
     logo = d.find('img')
 
     all1=[]
@@ -55,12 +65,18 @@ for d in soup.find_all("div", {"class":"quarter"}):
     if text is not None:
         all1.append(text.text.strip().splitlines())
 
+    if temperature is not None:
+        all1.append(temperature.text)
+
+    if vent is not None:
+        all1.append(vent.text)
+
     if logo is not None:
         all1.append(logo['data-src'])
 
     alls.append(all1)
 
-meteo_vendredi = pd.DataFrame(alls, columns=['period', 'meteo', 'logo'])
+meteo_vendredi = pd.DataFrame(alls, columns=['period', 'meteo', 'temperature', 'vent', 'logo'])
 meteo_vendredi = meteo_vendredi.loc[0:3]
 
 for d in soup.find_all("div", {"id":"forecastContainer"}):
@@ -78,6 +94,8 @@ alls = []
 for d in soup.find_all("div", {"class":"quarter"}):
     period = d.find('div', attrs={'class':'front single'})
     text = d.find('div', attrs={'class':'cellText'})
+    temperature = d.select('.quarter .data>.splitData:nth-of-type(3) :nth-of-type(1)')[0].find('div')
+    vent = d.select('.quarter .data>.splitData:nth-of-type(4)')[0].find('span')
     logo = d.find('img')
 
     all1=[]
@@ -88,12 +106,18 @@ for d in soup.find_all("div", {"class":"quarter"}):
     if text is not None:
         all1.append(text.text.strip().splitlines())
 
+    if temperature is not None:
+        all1.append(temperature.text)
+
+    if vent is not None:
+        all1.append(vent.text)
+
     if logo is not None:
         all1.append(logo['data-src'])
 
     alls.append(all1)
 
-meteo_samedi = pd.DataFrame(alls, columns=['period', 'meteo', 'logo'])
+meteo_samedi = pd.DataFrame(alls, columns=['period', 'meteo', 'temperature', 'vent', 'logo'])
 meteo_samedi = meteo_samedi.loc[0:3]
 
 for d in soup.find_all("div", {"id":"forecastContainer"}):
@@ -111,6 +135,8 @@ alls = []
 for d in soup.find_all("div", {"class":"quarter"}):
     period = d.find('div', attrs={'class':'front single'})
     text = d.find('div', attrs={'class':'cellText'})
+    temperature = d.select('.quarter .data>.splitData:nth-of-type(3) :nth-of-type(1)')[0].find('div')
+    vent = d.select('.quarter .data>.splitData:nth-of-type(4)')[0].find('span')
     logo = d.find('img')
 
     all1=[]
@@ -121,12 +147,18 @@ for d in soup.find_all("div", {"class":"quarter"}):
     if text is not None:
         all1.append(text.text.strip().splitlines())
 
+    if temperature is not None:
+        all1.append(temperature.text)
+
+    if vent is not None:
+        all1.append(vent.text)
+
     if logo is not None:
         all1.append(logo['data-src'])
 
     alls.append(all1)
 
-meteo_dimanche = pd.DataFrame(alls, columns=['period', 'meteo', 'logo'])
+meteo_dimanche = pd.DataFrame(alls, columns=['period', 'meteo', 'temperature', 'vent', 'logo'])
 meteo_dimanche = meteo_dimanche.loc[0:3]
 
 for d in soup.find_all("div", {"id":"forecastContainer"}):
@@ -144,6 +176,8 @@ alls = []
 for d in soup.find_all("div", {"class":"quarter"}):
     period = d.find('div', attrs={'class':'front single'})
     text = d.find('div', attrs={'class':'cellText'})
+    temperature = d.select('.quarter .data>.splitData:nth-of-type(3) :nth-of-type(1)')[0].find('div')
+    vent = d.select('.quarter .data>.splitData:nth-of-type(4)')[0].find('span')
     logo = d.find('img')
 
     all1=[]
@@ -154,12 +188,18 @@ for d in soup.find_all("div", {"class":"quarter"}):
     if text is not None:
         all1.append(text.text.strip().splitlines())
 
+    if temperature is not None:
+        all1.append(temperature.text)
+
+    if vent is not None:
+        all1.append(vent.text)
+
     if logo is not None:
         all1.append(logo['data-src'])
 
     alls.append(all1)
 
-meteo_lundi = pd.DataFrame(alls, columns=['period', 'meteo', 'logo'])
+meteo_lundi = pd.DataFrame(alls, columns=['period', 'meteo', 'temperature', 'vent', 'logo'])
 meteo_lundi = meteo_lundi.loc[0:3]
 
 for d in soup.find_all("div", {"id":"forecastContainer"}):
@@ -177,6 +217,8 @@ alls = []
 for d in soup.find_all("div", {"class":"quarter"}):
     period = d.find('div', attrs={'class':'front single'})
     text = d.find('div', attrs={'class':'cellText'})
+    temperature = d.select('.quarter .data>.splitData:nth-of-type(3) :nth-of-type(1)')[0].find('div')
+    vent = d.select('.quarter .data>.splitData:nth-of-type(4)')[0].find('span')
     logo = d.find('img')
 
     all1=[]
@@ -187,12 +229,18 @@ for d in soup.find_all("div", {"class":"quarter"}):
     if text is not None:
         all1.append(text.text.strip().splitlines())
 
+    if temperature is not None:
+        all1.append(temperature.text)
+
+    if vent is not None:
+        all1.append(vent.text)
+
     if logo is not None:
         all1.append(logo['data-src'])
 
     alls.append(all1)
 
-meteo_mardi = pd.DataFrame(alls, columns=['period', 'meteo', 'logo'])
+meteo_mardi = pd.DataFrame(alls, columns=['period', 'meteo', 'temperature', 'vent', 'logo'])
 meteo_mardi = meteo_mardi.loc[0:3]
 
 for d in soup.find_all("div", {"id":"forecastContainer"}):
@@ -210,6 +258,8 @@ alls = []
 for d in soup.find_all("div", {"class":"quarter"}):
     period = d.find('div', attrs={'class':'front single'})
     text = d.find('div', attrs={'class':'cellText'})
+    temperature = d.select('.quarter .data>.splitData:nth-of-type(3) :nth-of-type(1)')[0].find('div')
+    vent = d.select('.quarter .data>.splitData:nth-of-type(4)')[0].find('span')
     logo = d.find('img')
 
     all1=[]
@@ -220,12 +270,18 @@ for d in soup.find_all("div", {"class":"quarter"}):
     if text is not None:
         all1.append(text.text.strip().splitlines())
 
+    if temperature is not None:
+        all1.append(temperature.text)
+
+    if vent is not None:
+        all1.append(vent.text)
+
     if logo is not None:
         all1.append(logo['data-src'])
 
     alls.append(all1)
 
-meteo_mercredi = pd.DataFrame(alls, columns=['period', 'meteo', 'logo'])
+meteo_mercredi = pd.DataFrame(alls, columns=['period', 'meteo', 'temperature', 'vent', 'logo'])
 meteo_mercredi = meteo_mercredi.loc[0:3]
 
 for d in soup.find_all("div", {"id":"forecastContainer"}):
@@ -242,8 +298,6 @@ while i<4:
     meteo_semaine['jour'][i] = meteo_semaine['jour'][i][6:]
     i += 1
 
-semaine = meteo_semaine['jour'][0]
-
 datetime = datetime.datetime.now().strftime("%Y.%m.%d.%H.%M.%S")
 
-meteo_semaine.to_csv("/home/freebox/Desktop/Meteo/data/chaine_meteo_"+semaine+"_"+datetime+".csv")
+meteo_semaine.to_csv("/home/freebox/Desktop/Meteo/data/chaine_meteo_"+datetime+".csv")
