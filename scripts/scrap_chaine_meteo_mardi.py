@@ -1,295 +1,64 @@
+# Import des librairies
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 import datetime
 
-response = requests.get('https://www.lachainemeteo.com/meteo-france/ville-215860/previsions-meteo-saint-georges-d-oleron-demain')
+# Crée un DataFrame vide pour stocker les données de prévision
+meteo_semaine = pd.DataFrame(columns=['jour','period', 'meteo', 'temperature', 'vent', 'logo'])
 
-soup = BeautifulSoup(response.text, 'html.parser')
+# Dictionnaire permettant d'itérer sur les jours de la semaine
+jours = {0:'demain', 1:'jeudi', 2:'vendredi', 3:'samedi', 4:'dimanche', 5:'lundi', 6:'mardi'}
 
-alls = []
+# Boucle sur le dictionnaire pour aller scraper les données et le splacer au fur et à mesure dans meteo_semaine
+for key,value in jours.items():
 
-for d in soup.find_all("div", {"class":"quarter"}):
-    period = d.find('div', attrs={'class':'front single'})
-    text = d.find('div', attrs={'class':'cellText'})
-    temperature = d.select('.quarter .data>.splitData:nth-of-type(3) :nth-of-type(1)')[0].find('div')
-    vent = d.select('.quarter .data>.splitData:nth-of-type(4)')[0].find('span')
-    logo = d.find('img')
+    # Récupère les données d'une page web et la soupifie
+    response = requests.get('https://www.lachainemeteo.com/meteo-france/ville-215860/previsions-meteo-saint-georges-d-oleron-'+value)
+    soup = BeautifulSoup(response.text, 'html.parser')
 
-    all1=[]
+    # Scrape les données de prévision : prévision, température, vent et logo de la prévision, pour une journée
+    # Avec 4 périodes : Nuit (0-6h), Matin(6-12h), Après-midi(12-18h), Soir(18h-00h)
+    alls = []
 
-    if period is not None:
-        all1.append(period.text.strip())
+    for d in soup.find_all("div", {"class":"quarter"}):
+        period = d.find('div', attrs={'class':'front single'})
+        text = d.find('div', attrs={'class':'cellText'})
+        temperature = d.select('.quarter .data>.splitData:nth-of-type(3) :nth-of-type(1)')[0].find('div')
+        vent = d.select('.quarter .data>.splitData:nth-of-type(4)')[0].find('span')
+        logo = d.find('img')
 
-    if text is not None:
-        all1.append(text.text.strip().splitlines())
+        all1=[]
 
-    if temperature is not None:
-        all1.append(temperature.text)
+        if period is not None:
+            all1.append(period.text.strip())
 
-    if vent is not None:
-        all1.append(vent.text)
+        if text is not None:
+            all1.append(text.text.strip().splitlines())
 
-    if logo is not None:
-        all1.append(logo['data-src'])
+        if temperature is not None:
+            all1.append(temperature.text)
 
-    alls.append(all1)
+        if vent is not None:
+            all1.append(vent.text)
 
-meteo_demain = pd.DataFrame(alls, columns=['period', 'meteo', 'temperature', 'vent', 'logo'])
-meteo_demain = meteo_demain.loc[0:3]
+        if logo is not None:
+            all1.append(logo['data-src'])
 
-for d in soup.find_all("div", {"id":"forecastContainer"}):
-    jour = d.find('h3', attrs={'class':'toggleDesktop'}).text
+        alls.append(all1)
 
-meteo_demain.insert(0,'jour',[jour, jour, jour, jour])
+    # Crée un DataFrame regroupant les données de la journée
+    meteo_jour = pd.DataFrame(alls, columns=['period', 'meteo', 'temperature', 'vent', 'logo'])
+    meteo_jour = meteo_jour.loc[0:3]
 
-response = requests.get('https://www.lachainemeteo.com/meteo-france/ville-215860/previsions-meteo-saint-georges-d-oleron-jeudi')
+    # Récupère le jour et le colle dans le dataframe
+    for d in soup.find_all("div", {"id":"forecastContainer"}):
+        jour = d.find('h3', attrs={'class':'toggleDesktop'}).text
 
-soup = BeautifulSoup(response.text, 'html.parser')
+    meteo_jour.insert(0,'jour',[jour, jour, jour, jour])
 
-alls = []
-
-for d in soup.find_all("div", {"class":"quarter"}):
-    period = d.find('div', attrs={'class':'front single'})
-    text = d.find('div', attrs={'class':'cellText'})
-    temperature = d.select('.quarter .data>.splitData:nth-of-type(3) :nth-of-type(1)')[0].find('div')
-    vent = d.select('.quarter .data>.splitData:nth-of-type(4)')[0].find('span')
-    logo = d.find('img')
-
-    all1=[]
-
-    if period is not None:
-        all1.append(period.text.strip())
-
-    if text is not None:
-        all1.append(text.text.strip().splitlines())
-
-    if temperature is not None:
-        all1.append(temperature.text)
-
-    if vent is not None:
-        all1.append(vent.text)
-
-    if logo is not None:
-        all1.append(logo['data-src'])
-
-    alls.append(all1)
-
-meteo_jeudi = pd.DataFrame(alls, columns=['period', 'meteo', 'temperature', 'vent', 'logo'])
-meteo_jeudi = meteo_jeudi.loc[0:3]
-
-for d in soup.find_all("div", {"id":"forecastContainer"}):
-    jour = d.find('h3', attrs={'class':'toggleDesktop'}).text
-
-meteo_jeudi.insert(0,'jour',[jour, jour, jour, jour])
-
-
-response = requests.get('https://www.lachainemeteo.com/meteo-france/ville-215860/previsions-meteo-saint-georges-d-oleron-vendredi')
-
-soup = BeautifulSoup(response.text, 'html.parser')
-
-alls = []
-
-for d in soup.find_all("div", {"class":"quarter"}):
-    period = d.find('div', attrs={'class':'front single'})
-    text = d.find('div', attrs={'class':'cellText'})
-    temperature = d.select('.quarter .data>.splitData:nth-of-type(3) :nth-of-type(1)')[0].find('div')
-    vent = d.select('.quarter .data>.splitData:nth-of-type(4)')[0].find('span')
-    logo = d.find('img')
-
-    all1=[]
-
-    if period is not None:
-        all1.append(period.text.strip())
-
-    if text is not None:
-        all1.append(text.text.strip().splitlines())
-
-    if temperature is not None:
-        all1.append(temperature.text)
-
-    if vent is not None:
-        all1.append(vent.text)
-
-    if logo is not None:
-        all1.append(logo['data-src'])
-
-    alls.append(all1)
-
-meteo_vendredi = pd.DataFrame(alls, columns=['period', 'meteo', 'temperature', 'vent', 'logo'])
-meteo_vendredi = meteo_vendredi.loc[0:3]
-
-for d in soup.find_all("div", {"id":"forecastContainer"}):
-    jour = d.find('h3', attrs={'class':'toggleDesktop'}).text
-
-meteo_vendredi.insert(0,'jour',[jour, jour, jour, jour])
-
-
-response = requests.get('https://www.lachainemeteo.com/meteo-france/ville-215860/previsions-meteo-saint-georges-d-oleron-samedi')
-
-soup = BeautifulSoup(response.text, 'html.parser')
-
-alls = []
-
-for d in soup.find_all("div", {"class":"quarter"}):
-    period = d.find('div', attrs={'class':'front single'})
-    text = d.find('div', attrs={'class':'cellText'})
-    temperature = d.select('.quarter .data>.splitData:nth-of-type(3) :nth-of-type(1)')[0].find('div')
-    vent = d.select('.quarter .data>.splitData:nth-of-type(4)')[0].find('span')
-    logo = d.find('img')
-
-    all1=[]
-
-    if period is not None:
-        all1.append(period.text.strip())
-
-    if text is not None:
-        all1.append(text.text.strip().splitlines())
-
-    if temperature is not None:
-        all1.append(temperature.text)
-
-    if vent is not None:
-        all1.append(vent.text)
-
-    if logo is not None:
-        all1.append(logo['data-src'])
-
-    alls.append(all1)
-
-meteo_samedi = pd.DataFrame(alls, columns=['period', 'meteo', 'temperature', 'vent', 'logo'])
-meteo_samedi = meteo_samedi.loc[0:3]
-
-for d in soup.find_all("div", {"id":"forecastContainer"}):
-    jour = d.find('h3', attrs={'class':'toggleDesktop'}).text
-
-meteo_samedi.insert(0,'jour',[jour, jour, jour, jour])
-
-
-response = requests.get('https://www.lachainemeteo.com/meteo-france/ville-215860/previsions-meteo-saint-georges-d-oleron-dimanche')
-
-soup = BeautifulSoup(response.text, 'html.parser')
-
-alls = []
-
-for d in soup.find_all("div", {"class":"quarter"}):
-    period = d.find('div', attrs={'class':'front single'})
-    text = d.find('div', attrs={'class':'cellText'})
-    temperature = d.select('.quarter .data>.splitData:nth-of-type(3) :nth-of-type(1)')[0].find('div')
-    vent = d.select('.quarter .data>.splitData:nth-of-type(4)')[0].find('span')
-    logo = d.find('img')
-
-    all1=[]
-
-    if period is not None:
-        all1.append(period.text.strip())
-
-    if text is not None:
-        all1.append(text.text.strip().splitlines())
-
-    if temperature is not None:
-        all1.append(temperature.text)
-
-    if vent is not None:
-        all1.append(vent.text)
-
-    if logo is not None:
-        all1.append(logo['data-src'])
-
-    alls.append(all1)
-
-meteo_dimanche = pd.DataFrame(alls, columns=['period', 'meteo', 'temperature', 'vent', 'logo'])
-meteo_dimanche = meteo_dimanche.loc[0:3]
-
-for d in soup.find_all("div", {"id":"forecastContainer"}):
-    jour = d.find('h3', attrs={'class':'toggleDesktop'}).text
-
-meteo_dimanche.insert(0,'jour',[jour, jour, jour, jour])
-
-
-response = requests.get('https://www.lachainemeteo.com/meteo-france/ville-215860/previsions-meteo-saint-georges-d-oleron-lundi')
-
-soup = BeautifulSoup(response.text, 'html.parser')
-
-alls = []
-
-for d in soup.find_all("div", {"class":"quarter"}):
-    period = d.find('div', attrs={'class':'front single'})
-    text = d.find('div', attrs={'class':'cellText'})
-    temperature = d.select('.quarter .data>.splitData:nth-of-type(3) :nth-of-type(1)')[0].find('div')
-    vent = d.select('.quarter .data>.splitData:nth-of-type(4)')[0].find('span')
-    logo = d.find('img')
-
-    all1=[]
-
-    if period is not None:
-        all1.append(period.text.strip())
-
-    if text is not None:
-        all1.append(text.text.strip().splitlines())
-
-    if temperature is not None:
-        all1.append(temperature.text)
-
-    if vent is not None:
-        all1.append(vent.text)
-
-    if logo is not None:
-        all1.append(logo['data-src'])
-
-    alls.append(all1)
-
-meteo_lundi = pd.DataFrame(alls, columns=['period', 'meteo', 'temperature', 'vent', 'logo'])
-meteo_lundi = meteo_lundi.loc[0:3]
-
-for d in soup.find_all("div", {"id":"forecastContainer"}):
-    jour = d.find('h3', attrs={'class':'toggleDesktop'}).text
-
-meteo_lundi.insert(0,'jour',[jour, jour, jour, jour])
-
-
-response = requests.get('https://www.lachainemeteo.com/meteo-france/ville-215860/previsions-meteo-saint-georges-d-oleron-mardi')
-
-soup = BeautifulSoup(response.text, 'html.parser')
-
-alls = []
-
-for d in soup.find_all("div", {"class":"quarter"}):
-    period = d.find('div', attrs={'class':'front single'})
-    text = d.find('div', attrs={'class':'cellText'})
-    temperature = d.select('.quarter .data>.splitData:nth-of-type(3) :nth-of-type(1)')[0].find('div')
-    vent = d.select('.quarter .data>.splitData:nth-of-type(4)')[0].find('span')
-    logo = d.find('img')
-
-    all1=[]
-
-    if period is not None:
-        all1.append(period.text.strip())
-
-    if text is not None:
-        all1.append(text.text.strip().splitlines())
-
-    if temperature is not None:
-        all1.append(temperature.text)
-
-    if vent is not None:
-        all1.append(vent.text)
-
-    if logo is not None:
-        all1.append(logo['data-src'])
-
-    alls.append(all1)
-
-meteo_mardi = pd.DataFrame(alls, columns=['period', 'meteo', 'temperature', 'vent', 'logo'])
-meteo_mardi = meteo_mardi.loc[0:3]
-
-for d in soup.find_all("div", {"id":"forecastContainer"}):
-    jour = d.find('h3', attrs={'class':'toggleDesktop'}).text
-
-meteo_mardi.insert(0,'jour',[jour, jour, jour, jour])
-
-
-meteo_semaine = pd.concat([meteo_demain, meteo_jeudi, meteo_vendredi, meteo_samedi, meteo_dimanche, meteo_lundi, meteo_mardi], ignore_index=True)
+    # Ajoute les données de chaque journée dans la loop for
+    meteo_semaine = pd.concat([meteo_semaine, meteo_jour], ignore_index=True)
 
 i = 0
 while i<4:
